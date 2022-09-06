@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Exercise 01 - Ajax</title>
+</head>
+<body>
+    <h1>Bài tập tải ảnh động bằng Ajax</h1>
+
+        <input type="url" placeholder="Nhập URL" id="url">
+        <button onclick="dowloadImg()" style="background-color: rgb(252, 87, 87); color: white; border-radius: 3px; border:0px;width:70px; height:20px; cursor: pointer;">Tải ảnh</button>
+        <div>
+            <img style="margin-top: 10px;" id="img" width="70%">
+        </div>
+    
+
+</body>
+<script>
+    function dowloadImg(){
+        var url = document.getElementById('url').value; // get the url from input
+        console.log(url);
+
+        $.ajax({
+            url: url,
+            cache: false,
+            xhrFields: {
+                responseType: 'blob'  // type blob
+            },
+            success: function (data) {
+                var img = document.getElementById('img'); 
+                var url = window.URL.createObjectURL(data);
+                img.src = url; // replace the src to load the image to web browsers
+            },
+            error: function () {
+                console.log(error);
+            }
+        });
+    }
+</script>
+</html>
+
+<!---Lam Quoc Hung - 519H291-->
