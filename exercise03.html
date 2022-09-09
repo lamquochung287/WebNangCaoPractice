@@ -10,8 +10,8 @@
 <body>
     <h1>Bài tập tải ảnh động bằng Ajax</h1>
 
-        <input type="url" placeholder="Nhập URL" id="url">
-        <button onclick="dowloadImg()" style="background-color: rgb(252, 87, 87); color: white; border-radius: 3px; border:0px;width:70px; height:20px; cursor: pointer;">Tải ảnh</button>
+        <input type="url" placeholder="Nhập URL" id="url" required="Yêu cầu nhập URL">
+        <button onclick="dowloadImgAsync()" style="background-color: rgb(252, 87, 87); color: white; border-radius: 3px; border:0px;width:70px; height:20px; cursor: pointer;">Tải ảnh</button>
         <div>
             <img style="margin-top: 10px;" id="img" width="70%">
         </div>
@@ -19,12 +19,48 @@
 
 </body>
 <script>
+    // use promise
     function dowloadImg(){
         var url = document.getElementById('url').value; // get the url from input
         console.log(url);
 
+        if(url === ''){
+            alert('Vui lòng nhập đường dẫn ');
+            document.getElementById("url").focus();
+            return;
+        }
+
+        return new Promise((resolve, reject)=>{
+            var xhr = new XMLHttpRequest();
+            xhr.onload = function() {
+                if(this.readyState == 4 && this.status == 200){
+                    resolve(this.response);
+                    var img = document.getElementById('img'); 
+                    img.src = window.URL.createObjectURL(this.response); // replace the src to load the image to web browsers
+                }
+                else{
+                    reject(this.response);
+                }
+            }
+            xhr.open('GET',url);
+            xhr.responseType = 'blob';
+            xhr.send();
+        })
         
     }
+
+    // use async await
+    async function dowloadImgAsync(){
+        var url = document.getElementById('url').value;
+        var img = document.getElementById('img');
+        const rest = await fetch(url).then(response => response.blob())
+        .then(data =>{
+            img.src = window.URL.createObjectURL(data);
+        })
+        .catch(err =>{console.log(err)});
+    }
+
+
 </script>
 </html>
 
