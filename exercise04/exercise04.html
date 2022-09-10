@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="exercise04.js"></script>
+    <title>Exercise 04</title>
+</head>
+<body>
+    <h1>Danh sách sinh viên</h1>
+
+    <table>
+        <tr>
+            <td><label for="name">Họ và tên:</label></td>
+            <td><input type="text" placeholder="Nhập tên" id="name" style="width: 175px;" required></td>
+        </tr>
+        <tr>
+            <td><label for="age">Tuổi:</label></td>
+            <td><input type="number" id="age" placeholder="Nhập tuổi" min="0" max="100" style="width: 175px;" required></td>
+        </tr>
+    </table>
+
+    <br>
+
+    <div>
+        <button class="btn btn-primary"type="button" onclick="saveLocalStorage()">Thêm Local Storage</button>
+        <button class="btn btn-danger"type="button" onclick="saveSessionStorage()">Thêm Session Storage</button>
+    </div>
+    <table style="width: 100%">
+        <tr>
+            <td>
+                <div>
+                    <h2> Local Storage</h2>
+                    <table class="table table-striped" style="margin-top:15px; width:50%"id="student_table">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên</th>
+                                <th>Tuổi</th>
+                            </tr>            
+                        </thead>
+                        <tbody>
+                            <script>
+                                //window.localStorage.clear();
+                                //if(localStorage.getItem('student') != null)
+                                    window.onload = displayTable();
+                            </script>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <h2> Session Storage</h2>
+                    <table class="table table-striped" style="margin-top:15px; width:50%"id="student_session_table">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên</th>
+                                <th>Tuổi</th>
+                            </tr>            
+                        </thead>
+                        <tbody>
+                            <script>
+                                    window.onload = displaySessionTable();
+                            </script>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+        </tr>    
+
+
+    </table>
+    
+    
+    
+</body>
+</html>
+
+<!---Lam Quoc Hung - 519H291-->

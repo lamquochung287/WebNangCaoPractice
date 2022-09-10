@@ -11,7 +11,8 @@
     <h1>Bài tập tải ảnh động bằng Ajax</h1>
 
         <input type="url" placeholder="Nhập URL" id="url" required="Yêu cầu nhập URL">
-        <button onclick="dowloadImgAsync()" style="background-color: rgb(252, 87, 87); color: white; border-radius: 3px; border:0px;width:70px; height:20px; cursor: pointer;">Tải ảnh</button>
+        <button onclick="dowloadImg()" style="background-color: rgb(252, 87, 87); color: white; border-radius: 3px; border:0px;width:70px; height:20px; cursor: pointer;">Tải ảnh</button>
+        <button onclick="dowloadImgAsync()" style="background-color: rgb(252, 87, 87); color: white; border-radius: 3px; border:0px;width:100px; height:20px; cursor: pointer;">Tải ảnh Await</button>
         <div>
             <img style="margin-top: 10px;" id="img" width="70%">
         </div>
@@ -51,13 +52,13 @@
 
     // use async await
     async function dowloadImgAsync(){
-        var url = document.getElementById('url').value;
         var img = document.getElementById('img');
-        const rest = await fetch(url).then(response => response.blob())
-        .then(data =>{
-            img.src = window.URL.createObjectURL(data);
-        })
-        .catch(err =>{console.log(err)});
+        try{
+            var temp = await dowloadImg();
+        }
+        catch(e){
+            console.log(e);
+        }
     }
 
 
